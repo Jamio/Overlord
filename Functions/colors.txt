@@ -1,0 +1,70 @@
+
+['GUI', 'BCG_RGB'] call BIS_fnc_displayColorGet
+(_this # 0) ctrlSetFade 1;
+(_this # 0) ctrlCommit 0;
+
+
+// TEXT COLOR
+onLoad = "(_this # 0) ctrlSetTextColor (['IGUI', 'TEXT_RGB'] call BIS_fnc_displayColorGet);"
+
+_r = profileNamespace getVariable 'IGUI_TEXT_RGB_R';
+_g = profileNamespace getVariable 'IGUI_TEXT_RGB_G';
+_b = profileNamespace getVariable 'IGUI_TEXT_RGB_B';
+_a = profileNamespace getVariable 'IGUI_TEXT_RGB_A';
+
+_igui = [_r,_g,_b,_a]; _igui
+
+
+{(profileNamespace getVariable 'IGUI_TEXT_RGB_R'),(profileNamespace getVariable 'IGUI_TEXT_RGB_G'),(profileNamespace getVariable 'IGUI_TEXT_RGB_B'),2};
+
+
+
+
+
+
+// ORANGE HEADER
+['GUI', 'BCG_RGB'] call BIS_fnc_displayColorGet;
+onLoad = "(_this # 0) ctrlSetBackgroundColor (['GUI', 'BCG_RGB'] call BIS_fnc_displayColorGet); (_this # 0) ctrlSetFade .8; (_this # 0) ctrlCommit 0;"
+_r = profileNamespace getVariable 'GUI_BCG_RGB_R';
+_g = profileNamespace getVariable 'GUI_BCG_RGB_G';
+_b = profileNamespace getVariable 'GUI_BCG_RGB_B';
+_a = profileNamespace getVariable 'GUI_BCG_RGB_A';
+
+_background = [_r,_g,_b,_a]; _background
+
+{(profileNamespace getVariable 'GUI_BCG_RGB_R'),(profileNamespace getVariable 'GUI_BCG_RGB_G'),(profileNamespace getVariable 'GUI_BCG_RGB_B'),.8};
+
+
+
+
+// BACKGROUND
+_back = ['IGUI', 'BCG_RGB'] call BIS_fnc_displayColorGet;
+onLoad = "(_this # 0) ctrlSetBackgroundColor (['IGUI', 'BCG_RGB'] call BIS_fnc_displayColorGet);"
+onLoad = "(_this # 0) ctrlSetBackgroundColor (['IGUI', 'BCG_RGB'] call BIS_fnc_displayColorGet); (_this # 0) ctrlSetFade .8; (_this # 0) ctrlCommit 0;"
+
+
+_r = profileNamespace getVariable 'IGUI_BCG_RGB_R';
+_g = profileNamespace getVariable 'IGUI_BCG_RGB_G';
+_b = profileNamespace getVariable 'IGUI_BCG_RGB_B';
+_a = profileNamespace getVariable 'IGUI_BCG_RGB_A';
+
+_background = [_r,_g,_b,_a]; _background
+
+{(profileNamespace getVariable 'IGUI_BCG_RGB_R'),(profileNamespace getVariable 'IGUI_BCG_RGB_G'),(profileNamespace getVariable 'IGUI_BCG_RGB_B'),.8};
+
+
+
+
+
+
+// BUTTON
+profileNamespace getVariable 'BCG_MEDIUM_RGB_R';
+
+['GUI', 'BCG_MEDIUM_RGB'] call BIS_fnc_displayColorGet
+
+onLoad = "(_this # 0) ctrlSetBackgroundColor (['GUI', 'BCG_MEDIUM_RGB'] call BIS_fnc_displayColorGet); (_this # 0) ctrlSetFade .8; (_this # 0) ctrlCommit 0; (_this # 0) ctrlSetTextColor (['IGUI', 'TEXT_RGB'] call BIS_fnc_displayColorGet);"
+
+
+
+
+_control ctrlSetBackgroundColor [1, 0, 0, 1];

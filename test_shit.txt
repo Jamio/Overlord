@@ -1,0 +1,259 @@
+[[],OL_end_victory] remoteExec ["spawn",0];
+
+({[_x] call BIS_fnc_taskState == "SUCCEEDED"} count OL_main_tasks) == 2
+
+{
+
+	if ( _x in test ) then {
+
+		[["<t color='#ffffff' size='2'>Jump Master:  30 seconds!</t><br/>", "PLAIN DOWN", -1, false, true]] remoteExec ["cutText",_x];
+	
+	};
+
+} forEach allPlayers;
+
+
+{
+
+	if ( _x in _plane ) then {
+
+		[["<t color='#ffffff' size='2'>Jump Master:  Go! Go! Go!</t><br/>", "PLAIN DOWN", -1, false, true]] remoteExec ["cutText",_x];
+	
+	};
+
+} forEach allPlayers;
+
+
+ [this, spotlight_4] remoteExecCall ["disableCollisionWith", 0, this];
+
+(isClass(configFile >> "CfgPatches" >> "TFAR_Bag_Base"))
+
+
+
+[] execVM "Unitcap\Start\1_plane_1.sqf";
+
+[] execVM "Unitcap\Start\2_plane_1.sqf";
+
+    
+
+[5] remoteExec ["setAperture", 0, true];
+[] execVM "Scripts\Start\start_mission.sqf";
+
+
+[] execVM "Unitcap\Start\1_plane_1.sqf";
+[] execVM "Unitcap\Start\2_plane_1.sqf";
+[] execVM "Unitcap\Start\3_plane_1.sqf";
+[] execVM "Unitcap\Start\4_plane_1.sqf";
+[] execVM "Unitcap\Start\5_plane_1.sqf";
+[] execVM "Unitcap\Start\6_plane_1.sqf";
+[] execVM "Unitcap\Start\7_plane_1.sqf";
+[] execVM "Unitcap\Start\8_plane_1.sqf";
+[] execVM "Unitcap\Start\9_plane_1.sqf";
+
+
+{ _x moveInCargo plane_1; } forEach units test_group; 
+{ _x moveInCargo plane_2; } forEach units test_group2; 
+{ _x moveInCargo plane_4; } forEach units test_group3; 
+{ _x moveInCargo plane_6; } forEach units test_group4; 
+{ _x moveInCargo plane_7; } forEach units test_group5;
+{ _x moveInCargo plane_8; } forEach units test_group6;
+
+
+
+[] execVM "Scripts\Unitcap\Respawn\Phase_1\1_plane_1.sqf";
+[] execVM "Scripts\Unitcap\Respawn\Phase_1\2_plane_1.sqf";
+
+
+
+
+vehicle player setAirplaneThrottle 0.2;
+[] spawn OL_respawn_p1_plane_1_1;
+[] spawn OL_respawn_p1_plane_2_1;
+[] execVM "Scripts\Unitcap\Respawn\Phase_1\3_plane_1.sqf";
+
+
+[vehicle player, 800, 30, true] spawn BIS_fnc_unitCapture;
+
+
+
+
+plane_2 spawn LIB_cargoOpenDoorStatement
+
+[_plane,LIB_cargoOpenDoorStatement] remoteExec ["spawn",0];
+
+
+player groupRadio 'SentDetectedBomb'; 
+player groupRadio 'SentUnitPosMiddle'; 
+
+
+"TFAR_Bag_Base"
+
+_relPos = [-13.5938,31.9731,-0.168106];
+
+player setpos (test3 modelToWorld _relPos); 
+
+
+
+
+OL_arty_array = [];
+{ OL_arty_array pushBack _x } forEach [arty];
+
+
+_tasks = player call BIS_fnc_tasksUnit;
+{
+
+
+[_x, independent] call BIS_fnc_deleteTask;
+
+
+} forEach _tasks;
+
+
+(OL_sectors_enabled)
+
+player allowDamage false;
+OL_sectors_enabled = true;
+player setCaptive true;
+
+OL_arty_array
+
+{[_x] join player } forEach crew vehicle player;
+
+_markerVarArray = missionNameSpace getVariable "main_mrkr_[2564,2510.72,0]";
+_vehicles = _markerVarArray select 9; _vehicles
+
+
+// To Get All Objects within 50m.
+[getPos player, 50, true] call BIS_fnc_objectsGrabber;
+
+
+// To get relative position for a unit spawn.
+test worldToModel ASLToAGL getPosASL player; 
+
+
+
+
+
+
+player allowDamage false;
+OL_sectors_enabled = true;
+[] spawn OL_patrol_spawn_patrol_veh_1;
+[] spawn OL_patrol_spawn_patrol_veh_2;
+
+
+
+
+
+
+
+[] spawn OL_fnc_misc_saveMission;
+
+
+
+
+
+
+_markerVarArray = missionNameSpace getVariable "mg_mrkr_[1520.35,1525.25,0]";
+
+_units = _markerVarArray select 8; _units
+
+
+// WIN
+player allowDamage false;
+OL_sectors_enabled = true;
+
+
+
+{ _x setDamage 1} forEach OL_enemy_flak_array + [OL_radio_tower];
+
+
+
+OL_sectors_enabled = true;
+[] spawn OL_patrol_spawn_foot_1;
+
+
+
+count OL_sector_array
+
+
+[] execVM "Scripts\Enemy\Sectors\1_create_aa_site_draft.sqf";
+
+
+(missionProfileNamespace getVariable "main_obj_mrkr") select 4
+
+
+
+
+
+
+
+
+	_headlessClients = entities "HeadlessClient_F";
+	_humanPlayers = allPlayers - _headlessClients;
+
+
+	_playerArray = [];
+
+	{
+
+		_player = _x;
+	
+		{
+		
+			if ( alive _x ) then { _playerArray pushBack _x; };
+		
+		} forEach units group _player;
+
+	} forEach _humanPlayers;
+
+_marker = "aa_mrkr_3";
+(( {(alive _x) && (_x distance getMarkerPos _marker <= OL_sector_act_dist) } count _playerArray) <= 0)
+
+
+				_markerVarArray = missionProfileNamespace getVariable _marker;
+				
+				_sectorUnits = _markerVarArray select 4;
+				_sectorVeh = _markerVarArray select 5;		
+
+_sectorUnits
+
+
+
+
+
+
+[] execVM "Scripts\Enemy\Sectors\Spawn\1_sector_manager.sqf";
+
+["aa_mrkr_1"] execVM "Scripts\Enemy\Sectors\Spawn\2_spawn_sector_draft.sqf";
+
+
+
+
+
+
+
+
+_markerVarArray = missionNameSpace getVariable "aa_mrkr_1"; 
+_sectorVeh = _markerVarArray select 5;  _sectorVeh 
+
+
+_unitInfo = _sectorVeh select 0;
+_vehType = _unitInfo select 6; _vehType
+
+
+
+_unit = _unitInfo select 0; _unit
+
+_marker = _unitInfo select 1; _marker
+
+_type = _unitInfo select 2; _type
+
+_role = _unitInfo select 3; _role
+
+_pos =  _unitInfo select 4; _pos
+
+_dir = _unitInfo select 5; _dir
+
+_vehType = _unitInfo select 6; _vehType
+
+_static = _unitInfo select 7; _static
